@@ -20,26 +20,31 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(l, format);
-
 	while (format && format[i])
 	{
 		if (format[i] == '%')
 		{
-			void (*f)(buff_t *, va_list) = handle_converters(format[++i]);
+			if (format[++i] != '\0')
+			{
+				void (*f)(buff_t *, va_list) = handle_converters(format[i]);
 
-			if (f != NULL)
-				f(&buff, l);
+				if (f != NULL)
+					f(&buff, l);
+				else
+					handle_buffer_c(&buff, format[--i]);
+			}
 			else
-				handle_buffer_c(&buff, format[--i]);
+			{
+				write_buffer(&buff);
+				return (-1);
+			}
 		}
 		else
 			handle_buffer_c(&buff, format[i]);
 
 		i++;
 	}
-
 	write_buffer(&buff);
-
 	va_end(l);
 
 	return (buff.o);
