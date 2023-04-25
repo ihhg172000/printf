@@ -9,5 +9,5 @@ void convert_b(buff_t *buff, va_list l)
 {
 	unsigned int n = va_arg(l, unsigned int);
 
-	unsigned_int_to_buffer(buff, n, 2);
+	unsigned_int_to_buffer(buff, n, 2, 0);
 }
