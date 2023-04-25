@@ -14,6 +14,8 @@ void (*handle_converters(char s))(buff_t *buff, va_list l)
 		{'%', convert_precent},
 		{'c', convert_c},
 		{'s', convert_s},
+		{'d', convert_d},
+		{'i', convert_d},
 		{'\0', NULL}
 	};
 
