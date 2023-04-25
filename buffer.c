@@ -89,10 +89,32 @@ void handle_buffer_s(buff_t *buff, char *s)
 */
 void handle_buffer_c(buff_t *buff, char c)
 {
-	char s[2];
+	if (c == '\0')
+	{
+		write_buffer(buff);
+		write(1, &c, 1);
+		buff->o += 1;
+		return;
+	}
 
-	s[0] = c;
-	s[1] = '\0';
+	if (validate_buffer(buff, 1) == 0)
+	{
+		*buff->p++ = c;
+		*(buff->p + 1) = '\0';
+		buff->s--;
+	}
+	else if (validate_buffer(buff, 1) == 1)
+	{
+		write_buffer(buff);
 
-	handle_buffer_s(buff, s);
+		*buff->p++ = c;
+		*(buff->p + 1) = '\0';
+		buff->s--;
+	}
+	else
+	{
+		write_buffer(buff);
+		write(1, &c, 1);
+		buff->o += 1;
+	}
 }
