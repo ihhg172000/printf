@@ -9,5 +9,5 @@ void convert_s(buff_t *buff, va_list l)
 {
 	char *s = va_arg(l, char *);
 
-	handle_buffer_s(buff, s);
+	handle_buffer_s(buff, (s != NULL ? s : "(null)"));
 }
