@@ -49,9 +49,8 @@ void convert_X(buff_t *buff, va_list l);
 
 void clean_buffer(buff_t *buff);
 void write_buffer(buff_t *buff);
-int validate_buffer(buff_t *buff, int rs);
-void handle_buffer_s(buff_t *buff, char *s);
 void handle_buffer_c(buff_t *buff, char c);
+void handle_buffer_s(buff_t *buff, char *s);
 
 void uint_to_buffer(buff_t *buff, unsigned int n, unsigned int b, char c);
 void int_to_buffer(buff_t *buff, int n, unsigned int b, char c);

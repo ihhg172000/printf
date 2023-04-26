@@ -12,14 +12,12 @@ int _printf(const char *format, ...)
 	int i = 0;
 	va_list l;
 
-	buff.p = buff.b;
-	buff.s = BUFFSIZE - 1;
-	buff.o = 0;
-
 	if (format == NULL)
 		return (-1);
 
 	clean_buffer(&buff);
+	buff.o = 0;
+
 	va_start(l, format);
 
 	while (format && format[i])
@@ -45,7 +43,9 @@ int _printf(const char *format, ...)
 			handle_buffer_c(&buff, format[i]);
 		i++;
 	}
+
 	write_buffer(&buff);
 	va_end(l);
+
 	return (buff.o);
 }
