@@ -35,6 +35,23 @@ char digit_to_char(int n, char c)
 }
 
 /**
+* uint_to_buffer_rec - _
+* @buff: _
+* @n: _
+* @b: _
+* @c: _
+*/
+void uint_to_buffer_rec(buff_t *buff, unsigned int n, unsigned int b, char c)
+{
+	if (n > 0)
+		uint_to_buffer_rec(buff, n / b, b, c);
+	else
+		return;
+
+	handle_buffer_c(buff, digit_to_char(n % b, c));
+}
+
+/**
 * uint_to_buffer- _
 * @buff: _
 * @n: _
@@ -43,12 +60,13 @@ char digit_to_char(int n, char c)
 */
 void uint_to_buffer(buff_t *buff, unsigned int n, unsigned int b, char c)
 {
-	if (n > 0)
-		uint_to_buffer(buff, n / b, b, c);
-	else
+	if (n == 0)
+	{
+		handle_buffer_c(buff, '0');
 		return;
+	}
 
-	handle_buffer_c(buff, digit_to_char(n % b, c));
+	uint_to_buffer_rec(buff, n, b, c);
 }
 
 /**
