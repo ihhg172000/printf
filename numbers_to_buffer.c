@@ -4,6 +4,8 @@
 * digit_to_char - _
 * @n: _
 * @c: _
+*
+* Return: _
 */
 char digit_to_char(int n, char c)
 {
@@ -33,30 +35,30 @@ char digit_to_char(int n, char c)
 }
 
 /**
-* unsigned_int_to_buffer- _
+* uint_to_buffer- _
 * @buff: _
 * @n: _
-* @base: _
+* @b: _
 * @c: _
 */
-void unsigned_int_to_buffer(buff_t *buff, unsigned int n, unsigned int base, char c)
+void uint_to_buffer(buff_t *buff, unsigned int n, unsigned int b, char c)
 {
 	if (n > 0)
-		unsigned_int_to_buffer(buff, n / base, base, c);
+		uint_to_buffer(buff, n / b, b, c);
 	else
 		return;
-	
-	handle_buffer_c(buff, digit_to_char(n % base, c));
+
+	handle_buffer_c(buff, digit_to_char(n % b, c));
 }
 
 /**
 * int_to_buffer - _
 * @buff: _
 * @n: _
-* @base: _
+* @b: _
 * @c: _
 */
-void int_to_buffer(buff_t *buff, int n, unsigned int base, char c)
+void int_to_buffer(buff_t *buff, int n, unsigned int b, char c)
 {
 	unsigned int number;
 
@@ -70,10 +72,10 @@ void int_to_buffer(buff_t *buff, int n, unsigned int base, char c)
 	{
 		number = n * -1;
 		handle_buffer_c(buff, '-');
-		unsigned_int_to_buffer(buff, number, base, c);
+		uint_to_buffer(buff, number, b, c);
 		return;
 	}
 
 	number = n;
-	unsigned_int_to_buffer(buff, number, base, c);
+	uint_to_buffer(buff, number, b, c);
 }

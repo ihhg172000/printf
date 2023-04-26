@@ -53,7 +53,7 @@ int validate_buffer(buff_t *buff, int rs);
 void handle_buffer_s(buff_t *buff, char *s);
 void handle_buffer_c(buff_t *buff, char c);
 
-void unsigned_int_to_buffer(buff_t *buff, unsigned int n, unsigned int base, char c);
-void int_to_buffer(buff_t *buff, int n, unsigned int base, char c);
+void uint_to_buffer(buff_t *buff, unsigned int n, unsigned int b, char c);
+void int_to_buffer(buff_t *buff, int n, unsigned int b, char c);
 
 #endif
