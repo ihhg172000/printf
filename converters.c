@@ -17,6 +17,10 @@ void (*handle_converters(char s))(buff_t *buff, va_list l)
 		{'d', convert_d},
 		{'i', convert_d},
 		{'b', convert_b},
+		{'u', convert_u},
+		{'o', convert_o},
+		{'x', convert_x},
+		{'X', convert_X},
 		{'\0', NULL}
 	};
 
