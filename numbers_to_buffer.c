@@ -26,7 +26,7 @@ char digit_to_char(int n, char c)
 		case 13:
 		case 14:
 		case 15:
-			return (n + c);
+			return ((n % 10) + c);
 		default:
 			return (0);
 	}

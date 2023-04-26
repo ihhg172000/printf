@@ -45,7 +45,7 @@ void convert_b(buff_t *buff, va_list l);
 void convert_u(buff_t *buff, va_list l);
 void convert_o(buff_t *buff, va_list l);
 void convert_x(buff_t *buff, va_list l);
-void convert_X(buff_t *buff, va_list l)
+void convert_X(buff_t *buff, va_list l);
 
 void clean_buffer(buff_t *buff);
 void write_buffer(buff_t *buff);
