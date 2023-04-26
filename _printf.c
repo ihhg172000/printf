@@ -19,7 +19,9 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
+	clean_buffer(&buff);
 	va_start(l, format);
+
 	while (format && format[i])
 	{
 		if (format[i] == '%')
@@ -41,11 +43,9 @@ int _printf(const char *format, ...)
 		}
 		else
 			handle_buffer_c(&buff, format[i]);
-
 		i++;
 	}
 	write_buffer(&buff);
 	va_end(l);
-
 	return (buff.o);
 }
