@@ -2,12 +2,16 @@
 
 /**
 * convert_d - _
-* @buff: _
+* @b: _
+* @flags: _
 * @l: _
 */
-void convert_d(buff_t *buff, va_list l)
+void convert_d(buff_t *b, __attribute__((unused))char *flags, va_list l)
 {
 	int n = va_arg(l, int);
 
-	int_to_buffer(buff, n, 10, 0);
+	if (flags[1] == '+' && n >= 0)
+		handle_buffer_c(b, '+');
+
+	handle_buffer_i(b, n, 10, 0);
 }

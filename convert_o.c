@@ -2,13 +2,17 @@
 
 /**
 * convert_o - _
-* @buff: _
+* @b: _
+* @flags: _
 * @l: _
 */
-void convert_o(buff_t *buff, va_list l)
+void convert_o(buff_t *b, char *flags, va_list l)
 {
-	int n = va_arg(l, unsigned int);
+	unsigned int n = va_arg(l, unsigned int);
 
-	uint_to_buffer(buff, n, 8, 0);
+	if (flags[0] == '#' && n != 0)
+		handle_buffer_c(b, '0');
+
+	handle_buffer_u(b, n, 8, 0);
 }
 

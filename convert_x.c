@@ -2,12 +2,16 @@
 
 /**
 * convert_x - _
-* @buff: _
+* @b: _
+* @flags: _
 * @l: _
 */
-void convert_x(buff_t *buff, va_list l)
+void convert_x(buff_t *b, char *flags, va_list l)
 {
 	unsigned int n = va_arg(l, unsigned int);
 
-	uint_to_buffer(buff, n, 16, 'a');
+	if (flags[0] == '#' && n != 0)
+		handle_buffer_s(b, "0x");
+
+	handle_buffer_u(b, n, 16, 'a');
 }

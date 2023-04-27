@@ -30,29 +30,31 @@ typedef struct buffer
 typedef struct converter
 {
 	char s;
-	void (*f)(buff_t *buff, va_list l);
+	void (*f)(buff_t *b, char *flags, va_list l);
 } converter_t;
 
 int _printf(const char *format, ...);
 
-void (*handle_converters(char specifier))(buff_t *buff, va_list l);
+void handle_flags(const char *format, char *flags, int *i);
 
-void convert_precent(buff_t *buff, va_list l);
-void convert_c(buff_t *buff, va_list l);
-void convert_s(buff_t *buff, va_list l);
-void convert_d(buff_t *buff, va_list l);
-void convert_b(buff_t *buff, va_list l);
-void convert_u(buff_t *buff, va_list l);
-void convert_o(buff_t *buff, va_list l);
-void convert_x(buff_t *buff, va_list l);
-void convert_X(buff_t *buff, va_list l);
+void handle_converters(buff_t *b, char *flags, va_list l, char s);
 
-void clean_buffer(buff_t *buff);
-void write_buffer(buff_t *buff);
-void handle_buffer_c(buff_t *buff, char c);
-void handle_buffer_s(buff_t *buff, char *s);
+void convert_precent(buff_t *b, char *flags, va_list l);
+void convert_c(buff_t *b, char *flags, va_list l);
+void convert_s(buff_t *b, char *flags, va_list l);
+void convert_d(buff_t *b, char *flags, va_list l);
+void convert_b(buff_t *b, char *flags, va_list l);
+void convert_u(buff_t *b, char *flags, va_list l);
+void convert_o(buff_t *b, char *flags, va_list l);
+void convert_x(buff_t *b, char *flags, va_list l);
+void convert_X(buff_t *b, char *flags, va_list l);
 
-void uint_to_buffer(buff_t *buff, unsigned int n, unsigned int b, char c);
-void int_to_buffer(buff_t *buff, int n, unsigned int b, char c);
+void clean_buffer(buff_t *b);
+void write_buffer(buff_t *b);
+void handle_buffer_c(buff_t *b, char c);
+void handle_buffer_s(buff_t *b, char *s);
+
+void handle_buffer_u(buff_t *b, unsigned int n, unsigned int base, char c);
+void handle_buffer_i(buff_t *b, int n, unsigned int base, char c);
 
 #endif

@@ -2,12 +2,13 @@
 
 /**
 * convert_b - _
-* @buff: _
+* @b: _
+* @flags: _
 * @l: _
 */
-void convert_b(buff_t *buff, va_list l)
+void convert_b(buff_t *b, __attribute__((unused))char *flags, va_list l)
 {
 	unsigned int n = va_arg(l, unsigned int);
 
-	uint_to_buffer(buff, n, 2, 0);
+	handle_buffer_u(b, n, 2, 0);
 }

@@ -1,6 +1,45 @@
 #include "main.h"
 
 /**
+* _printf_handle_format - _
+* @format: _
+* @l: _
+* @b: _
+*
+* Return: _
+*/
+int _printf_handle_format(const char *format, va_list l, buff_t *b)
+{
+	int i = 0;
+
+	while (format && format[i])
+	{
+		if (format[i] == '%')
+		{
+			char flags[3] = {'\0', '\0', '\0'};
+
+			i++;
+
+			handle_flags(format, flags, &i);
+
+			if (format[i] != '\0')
+				handle_converters(b, flags, l, format[i]);
+			else
+			{
+				write_buffer(b);
+				return (-1);
+			}
+		}
+		else
+			handle_buffer_c(b, format[i]);
+
+		i++;
+	}
+
+	return (0);
+}
+
+/**
 * _printf - _
 * @format: _
 *
@@ -8,44 +47,22 @@
 */
 int _printf(const char *format, ...)
 {
-	buff_t buff;
-	int i = 0;
+	buff_t b;
 	va_list l;
 
 	if (format == NULL)
 		return (-1);
 
-	clean_buffer(&buff);
-	buff.o = 0;
+	clean_buffer(&b);
+	b.o = 0;
 
 	va_start(l, format);
 
-	while (format && format[i])
-	{
-		if (format[i] == '%')
-		{
-			if (format[++i] != '\0')
-			{
-				void (*f)(buff_t *, va_list) = handle_converters(format[i]);
+	if (_printf_handle_format(format, l, &b) != 0)
+		return (-1);
 
-				if (f != NULL)
-					f(&buff, l);
-				else
-					handle_buffer_c(&buff, format[--i]);
-			}
-			else
-			{
-				write_buffer(&buff);
-				return (-1);
-			}
-		}
-		else
-			handle_buffer_c(&buff, format[i]);
-		i++;
-	}
-
-	write_buffer(&buff);
+	write_buffer(&b);
 	va_end(l);
 
-	return (buff.o);
+	return (b.o);
 }
