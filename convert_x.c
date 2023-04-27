@@ -13,5 +13,5 @@ void convert_x(buff_t *b, char *flags, va_list l)
 	if (flags[0] == '#' && n != 0)
 		handle_buffer_s(b, "0x");
 
-	handle_buffer_u(b, n, 16, 'a');
+	handle_buffer_ul(b, n, 16, digit_to_char_lower);
 }

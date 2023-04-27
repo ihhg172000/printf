@@ -9,6 +9,10 @@
 */
 void handle_flags(const char *format, char *flags, int *i)
 {
+	flags[0] = 0;
+	flags[1] = 0;
+	flags[2] = 0;
+
 	while (format[*i] == '#' || format[*i] == '+' || format[*i] == ' ')
 	{
 		switch (format[*i])
@@ -18,11 +22,13 @@ void handle_flags(const char *format, char *flags, int *i)
 				break;
 			case '+':
 				flags[1] = '+';
+				break;
+			case ' ':
+				flags[2] = ' ';
 		}
 
 		(*i)++;
 	}
-
 }
 
 /**
@@ -37,7 +43,7 @@ void handle_flags(const char *format, char *flags, int *i)
 void handle_converters(buff_t *b, char *flags, va_list l, char s)
 {
 	int i;
-	void (*f)(buff_t *, char *, va_list);
+	void (*f)(buff_t *, char *, va_list) = NULL;
 
 	converter_t converters[] = {
 		{'%', convert_precent},
@@ -62,17 +68,16 @@ void handle_converters(buff_t *b, char *flags, va_list l, char s)
 	if (f != NULL)
 	{
 		f(b, flags, l);
+		return;
 	}
-	else
-	{
-		handle_buffer_c(b, '%');
 
-		if (flags[0] != '\0')
-			handle_buffer_c(b, flags[0]);
+	handle_buffer_c(b, '%');
 
-		if (flags[1] != '\0')
-			handle_buffer_c(b, flags[1]);
+	if (flags[0] != '\0')
+		handle_buffer_c(b, flags[0]);
 
-		handle_buffer_c(b, s);
-	}
+	if (flags[1] != '\0')
+		handle_buffer_c(b, flags[1]);
+
+	handle_buffer_c(b, s);
 }

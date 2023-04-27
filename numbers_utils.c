@@ -1,64 +1,70 @@
 #include "main.h"
 
 /**
-* digit_to_char - _
+* digit_to_char_lower - _
 * @n: _
-* @c: _
 *
 * Return: _
 */
-char digit_to_char(int n, char c)
+char digit_to_char_lower(unsigned int n)
 {
-	switch (n)
-	{
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			return (n + 48);
-		case 10:
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-		case 15:
-			return ((n % 10) + c);
-		default:
-			return (0);
-	}
+	char *hex_chars = "0123456789abcdef";
+
+	if (n <= 16)
+		return (hex_chars[n]);
+
+	return (0);
 }
 
 /**
-* handle_buffer_u_rec - _
+* digit_to_char_upper - _
+* @n: _
+*
+* Return: _
+*/
+char digit_to_char_upper(unsigned int n)
+{
+	char *hex_chars = "0123456789ABCDEF";
+
+	if (n <= 16)
+		return (hex_chars[n]);
+
+	return (0);
+}
+
+/**
+* _handle_buffer_ul - _
 * @b: _
 * @n: _
 * @base: _
-* @c: _
+* @to_char: _
 */
-void handle_buffer_u_rec(buff_t *b, unsigned int n, unsigned int base, char c)
+void _handle_buffer_ul(
+			buff_t *b,
+			unsigned long n,
+			unsigned long base,
+			char (*to_char)(unsigned int c))
 {
 	if (n > 0)
-		handle_buffer_u_rec(b, n / base, base, c);
+		_handle_buffer_ul(b, n / base, base, to_char);
 	else
 		return;
 
-	handle_buffer_c(b, digit_to_char(n % base, c));
+	handle_buffer_c(b, to_char(n % base));
 }
 
 /**
-* handle_buffer_u - _
+* handle_buffer_ul - _
 * @b: _
 * @n: _
 * @base: _
-* @c: _
+* @to_char: _
 */
-void handle_buffer_u(buff_t *b, unsigned int n, unsigned int base, char c)
+void handle_buffer_ul(
+			buff_t *b,
+			unsigned long n,
+			unsigned long base,
+			char (*to_char)(unsigned int c))
 {
 	if (n == 0)
 	{
@@ -66,19 +72,23 @@ void handle_buffer_u(buff_t *b, unsigned int n, unsigned int base, char c)
 		return;
 	}
 
-	handle_buffer_u_rec(b, n, base, c);
+	_handle_buffer_ul(b, n, base, to_char);
 }
 
 /**
-* handle_buffer_i - _
+* handle_buffer_long - _
 * @b: _
 * @n: _
 * @base: _
-* @c: _
+* @to_char: _
 */
-void handle_buffer_i(buff_t *b, int n, unsigned int base, char c)
+void handle_buffer_l(
+			buff_t *b,
+			long n,
+			unsigned long base,
+			char (*to_char)(unsigned int c))
 {
-	unsigned int number;
+	unsigned long number;
 
 	if (n == 0)
 	{
@@ -90,10 +100,10 @@ void handle_buffer_i(buff_t *b, int n, unsigned int base, char c)
 	{
 		number = n * -1;
 		handle_buffer_c(b, '-');
-		handle_buffer_u(b, number, base, c);
+		handle_buffer_ul(b, number, base, to_char);
 		return;
 	}
 
 	number = n;
-	handle_buffer_u(b, number, base, c);
+	handle_buffer_ul(b, number, base, to_char);
 }

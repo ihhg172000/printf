@@ -54,7 +54,20 @@ void write_buffer(buff_t *b);
 void handle_buffer_c(buff_t *b, char c);
 void handle_buffer_s(buff_t *b, char *s);
 
-void handle_buffer_u(buff_t *b, unsigned int n, unsigned int base, char c);
-void handle_buffer_i(buff_t *b, int n, unsigned int base, char c);
+char digit_to_char_lower(unsigned int n);
+char digit_to_char_upper(unsigned int n);
+
+void handle_buffer_ul(
+			buff_t *b,
+			unsigned long n,
+			unsigned long base,
+			char (*to_chat)(unsigned int n));
+void handle_buffer_l(
+			buff_t *b,
+			long n,
+			unsigned long base,
+			char (*to_chat)(unsigned int n));
+
+void char_to_hex(char *hex, char c);
 
 #endif

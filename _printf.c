@@ -16,7 +16,7 @@ int _printf_handle_format(const char *format, va_list l, buff_t *b)
 	{
 		if (format[i] == '%')
 		{
-			char flags[3] = {'\0', '\0', '\0'};
+			char flags[3];
 
 			i++;
 
