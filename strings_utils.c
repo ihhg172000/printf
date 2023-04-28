@@ -34,3 +34,30 @@ char *reverse_string(char *s)
 
 	return (s);
 }
+
+/**
+* rot13_string - _
+* @s: _
+*
+* Return: _
+*/
+char *rot13_string(char *s)
+{
+	char *letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char *rot13 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int i, j;
+
+	for (i = 0; s[i]; i++)
+	{
+		for (j = 0; letters[j]; j++)
+		{
+			if (s[i] == letters[j])
+			{
+				s[i] = rot13[j];
+				break;
+			}
+		}
+	}
+
+	return (s);
+}

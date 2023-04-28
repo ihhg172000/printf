@@ -52,7 +52,8 @@ void handle_converters(buff_t *b, char *flags, va_list l, char s)
 		{'u', convert_u}, {'o', convert_o},
 		{'x', convert_x}, {'X', convert_X},
 		{'S', convert_S}, {'p', convert_p},
-		{'r', convert_r}, {'\0', NULL}
+		{'r', convert_r}, {'R', convert_R},
+		{'\0', NULL}
 	};
 
 	for (i = 0; converters[i].s; i++)

@@ -52,6 +52,7 @@ void convert_X(buff_t *b, char *flags, va_list l);
 void convert_S(buff_t *b, char *flags, va_list l);
 void convert_p(buff_t *b, char *flags, va_list l);
 void convert_r(buff_t *b, char *flags, va_list l);
+void convert_R(buff_t *b, char *flags, va_list l);
 
 void clean_buffer(buff_t *b);
 void write_buffer(buff_t *b);
@@ -65,14 +66,15 @@ void handle_buffer_ul(
 			buff_t *b,
 			unsigned long n,
 			unsigned long base,
-			char (*to_chat)(unsigned int n));
+			char (*to_char)(unsigned int n));
 void handle_buffer_l(
 			buff_t *b,
 			long n,
 			unsigned long base,
-			char (*to_chat)(unsigned int n));
+			char (*to_char)(unsigned int n));
 
 void char_to_hex(char *hex, char c);
 char *reverse_string(char *s);
+char *rot13_string(char *s);
 
 #endif
