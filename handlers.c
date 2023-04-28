@@ -46,19 +46,13 @@ void handle_converters(buff_t *b, char *flags, va_list l, char s)
 	void (*f)(buff_t *, char *, va_list) = NULL;
 
 	converter_t converters[] = {
-		{'%', convert_precent},
-		{'c', convert_c},
-		{'s', convert_s},
-		{'d', convert_d},
-		{'i', convert_d},
-		{'b', convert_b},
-		{'u', convert_u},
-		{'o', convert_o},
-		{'x', convert_x},
-		{'X', convert_X},
-		{'S', convert_S},
-		{'p', convert_p},
-		{'\0', NULL}
+		{'%', convert_precent}, {'c', convert_c},
+		{'s', convert_s}, {'d', convert_d},
+		{'i', convert_d}, {'b', convert_b},
+		{'u', convert_u}, {'o', convert_o},
+		{'x', convert_x}, {'X', convert_X},
+		{'S', convert_S}, {'p', convert_p},
+		{'r', convert_r}, {'\0', NULL}
 	};
 
 	for (i = 0; converters[i].s; i++)

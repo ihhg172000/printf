@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 
 #define BUFFSIZE 1024
 
@@ -50,6 +51,7 @@ void convert_x(buff_t *b, char *flags, va_list l);
 void convert_X(buff_t *b, char *flags, va_list l);
 void convert_S(buff_t *b, char *flags, va_list l);
 void convert_p(buff_t *b, char *flags, va_list l);
+void convert_r(buff_t *b, char *flags, va_list l);
 
 void clean_buffer(buff_t *b);
 void write_buffer(buff_t *b);
@@ -71,5 +73,6 @@ void handle_buffer_l(
 			char (*to_chat)(unsigned int n));
 
 void char_to_hex(char *hex, char c);
+char *reverse_string(char *s);
 
 #endif
