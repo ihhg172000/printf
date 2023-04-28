@@ -19,7 +19,7 @@ void convert_S(buff_t *b, __attribute__((unused))char *flags, va_list l)
 
 	for (i = 0; s[i]; i++)
 	{
-		if (s[i] > 32 && s[i] <= 127)
+		if (s[i] >= 32 && s[i] <= 126)
 			handle_buffer_c(b, s[i]);
 		else
 		{
