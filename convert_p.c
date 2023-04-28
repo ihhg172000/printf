@@ -8,7 +8,13 @@
 */
 void convert_p(buff_t *b, __attribute__((unused))char *flags, va_list l)
 {
-	unsigned long n = va_arg(l, unsigned long);
+	void *n = va_arg(l, void *);
+
+	if (n == NULL)
+	{
+		handle_buffer_s(b, "(nil)");
+		return;
+	}
 
 	if (flags[1] == '+')
 		handle_buffer_c(b, '+');
@@ -16,6 +22,6 @@ void convert_p(buff_t *b, __attribute__((unused))char *flags, va_list l)
 		handle_buffer_c(b, ' ');
 
 	handle_buffer_s(b, "0x");
-	handle_buffer_ul(b, n, 16, digit_to_char_lower);
+	handle_buffer_ul(b, (unsigned long) n, 16, digit_to_char_lower);
 }
 
