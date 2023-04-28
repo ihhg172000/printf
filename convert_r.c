@@ -11,6 +11,12 @@ void convert_r(buff_t *b, __attribute__((unused))char *flags, va_list l)
 	char *s = va_arg(l, char *);
 	char *s_dup = strdup(s);
 
+	if (s_dup == NULL)
+	{
+		handle_buffer_s(b, "(nil)");
+		return;
+	}
+
 	handle_buffer_s(b, reverse_string(s_dup));
 
 	free(s_dup);

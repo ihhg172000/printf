@@ -16,9 +16,9 @@ void char_to_hex(char *hex, char c)
 
 /**
 * reverse_string - _
-* @s:
+* @s: _
 *
-* Return:
+* Return: _
 */
 char *reverse_string(char *s)
 {
