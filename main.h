@@ -48,6 +48,7 @@ void convert_u(buff_t *b, char *flags, va_list l);
 void convert_o(buff_t *b, char *flags, va_list l);
 void convert_x(buff_t *b, char *flags, va_list l);
 void convert_X(buff_t *b, char *flags, va_list l);
+void convert_S(buff_t *b, char *flags, va_list l);
 
 void clean_buffer(buff_t *b);
 void write_buffer(buff_t *b);

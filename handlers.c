@@ -56,6 +56,7 @@ void handle_converters(buff_t *b, char *flags, va_list l, char s)
 		{'o', convert_o},
 		{'x', convert_x},
 		{'X', convert_X},
+		{'S', convert_S}, 
 		{'\0', NULL}
 	};
 
