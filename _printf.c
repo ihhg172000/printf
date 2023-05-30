@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
-* _printf_handle_format - _
-* @format: _
-* @l: _
-* @b: _
-*
-* Return: _
-*/
-int _printf_handle_format(const char *format, va_list l, buff_t *b)
+ * _printf_handle_format - handles format.
+ * @format: a pointer to the format string.
+ * @list: the variable list.
+ * @buff: a pointer to the buffer.
+ *
+ * Return: the number of chars printed on success, -1 on error.
+ */
+int _printf_handle_format(const char *format, va_list list, buff_t *buff)
 {
 	int i = 0;
 
@@ -23,15 +23,15 @@ int _printf_handle_format(const char *format, va_list l, buff_t *b)
 			handle_flags(format, flags, &i);
 
 			if (format[i] != '\0')
-				handle_converters(b, flags, l, format[i]);
+				handle_converters(buff, flags, list, format[i]);
 			else
 			{
-				write_buffer(b);
+				write_buffer(buff);
 				return (-1);
 			}
 		}
 		else
-			handle_buffer_c(b, format[i]);
+			handle_buffer_c(buff, format[i]);
 
 		i++;
 	}
@@ -40,29 +40,29 @@ int _printf_handle_format(const char *format, va_list l, buff_t *b)
 }
 
 /**
-* _printf - _
-* @format: _
-*
-* Return: _
-*/
+ * _printf - produces output according to format.
+ * @format: a pointer to the format string.
+ *
+ * Return: the number of chars printed on success, -1 on error.
+ */
 int _printf(const char *format, ...)
 {
-	buff_t b;
-	va_list l;
+	buff_t buff;
+	va_list list;
 
 	if (format == NULL)
 		return (-1);
 
-	clean_buffer(&b);
-	b.o = 0;
+	clean_buffer(&buff);
+	buff.printed_count = 0;
 
-	va_start(l, format);
+	va_start(list, format);
 
-	if (_printf_handle_format(format, l, &b) != 0)
+	if (_printf_handle_format(format, list, &buff) != 0)
 		return (-1);
 
-	write_buffer(&b);
-	va_end(l);
+	write_buffer(&buff);
+	va_end(list);
 
-	return (b.o);
+	return (buff.printed_count);
 }

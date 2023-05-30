@@ -1,12 +1,10 @@
 #include "main.h"
 /**
-* handle_flags - _
-* @format: _
-* @flags: _
-* @i: _
-*
-* Return: _
-*/
+ * handle_flags - handles flags.
+ * @format: a pointer to the format string.
+ * @flags: a pointer to the flags.
+ * @i: a pointer to the index of current char.
+ */
 void handle_flags(const char *format, char *flags, int *i)
 {
 	flags[0] = 0;
@@ -32,18 +30,16 @@ void handle_flags(const char *format, char *flags, int *i)
 }
 
 /**
-* handle_converters - _
-* @b: _
-* @flags: _
-* @l: _
-* @s: _
-*
-* Return: _
-*/
-void handle_converters(buff_t *b, char *flags, va_list l, char s)
+ * handle_converters - handles converters.
+ * @buff: a pointer to the buffer.
+ * @flags: a pointer to the flags.
+ * @list: the variable list.
+ * @specifier: the specifier that specifies the converter.
+ */
+void handle_converters(buff_t *buff, char *flags, va_list list, char specifier)
 {
 	int i;
-	void (*f)(buff_t *, char *, va_list) = NULL;
+	void (*fun)(buff_t *, char *, va_list) = NULL;
 
 	converter_t converters[] = {
 		{'%', convert_precent}, {'c', convert_c},
@@ -56,25 +52,25 @@ void handle_converters(buff_t *b, char *flags, va_list l, char s)
 		{'\0', NULL}
 	};
 
-	for (i = 0; converters[i].s; i++)
+	for (i = 0; converters[i].specifier; i++)
 	{
-		if (converters[i].s == s)
-			f = converters[i].f;
+		if (converters[i].specifier == specifier)
+			fun = converters[i].fun;
 	}
 
-	if (f != NULL)
+	if (fun != NULL)
 	{
-		f(b, flags, l);
+		fun(buff, flags, list);
 		return;
 	}
 
-	handle_buffer_c(b, '%');
+	handle_buffer_c(buff, '%');
 
 	if (flags[0] != '\0')
-		handle_buffer_c(b, flags[0]);
+		handle_buffer_c(buff, flags[0]);
 
 	if (flags[1] != '\0')
-		handle_buffer_c(b, flags[1]);
+		handle_buffer_c(buff, flags[1]);
 
-	handle_buffer_c(b, s);
+	handle_buffer_c(buff, specifier);
 }

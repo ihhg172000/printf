@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
-* char_to_hex - _
-* @hex: _
-* @c: _
-*/
+ * char_to_hex - converts a char to it's hexadecimal representation.
+ * @hex: a pointer to the buffer that holds hexadecimal representation.
+ * @c: the char.
+ */
 void char_to_hex(char *hex, char c)
 {
 	char *hex_chars = "0123456789ABCDEF";
@@ -15,11 +15,11 @@ void char_to_hex(char *hex, char c)
 }
 
 /**
-* reverse_string - _
-* @s: _
-*
-* Return: _
-*/
+ * reverse_string - reverses a string.
+ * @s: a pointer to the string to be reversed.
+ *
+ * Return: a pointer to the reversed string.
+ */
 char *reverse_string(char *s)
 {
 	char temp;
@@ -36,11 +36,11 @@ char *reverse_string(char *s)
 }
 
 /**
-* rot13_string - _
-* @s: _
-*
-* Return: _
-*/
+ * rot13_string - converts a string to it's rot13.
+ * @s: a pointer to the string to be converted.
+ *
+ * Return: a pointer to the converted string.
+ */
 char *rot13_string(char *s)
 {
 	char *letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

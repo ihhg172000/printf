@@ -1,27 +1,26 @@
 #include "main.h"
 
 /**
-* convert_p - _
-* @b: _
-* @flags: _
-* @l: _
-*/
-void convert_p(buff_t *b, __attribute__((unused))char *flags, va_list l)
+ * convert_p - converts the %p to be an address.
+ * @buff: a pointer to the buffer.
+ * @flags: a pointer to the flags.
+ * @list: the variable list.
+ */
+void convert_p(buff_t *buff, __attribute__((unused))char *flags, va_list list)
 {
-	void *n = va_arg(l, void *);
+	void *p = va_arg(list, void *);
 
-	if (n == NULL)
+	if (p == NULL)
 	{
-		handle_buffer_s(b, "(nil)");
+		handle_buffer_s(buff, "(nil)");
 		return;
 	}
 
 	if (flags[1] == '+')
-		handle_buffer_c(b, '+');
+		handle_buffer_c(buff, '+');
 	else if (flags[2] == ' ')
-		handle_buffer_c(b, ' ');
+		handle_buffer_c(buff, ' ');
 
-	handle_buffer_s(b, "0x");
-	handle_buffer_ul(b, (unsigned long) n, 16, digit_to_char_lower);
+	handle_buffer_s(buff, "0x");
+	handle_buffer_ul(buff, (unsigned long) p, 16, digit_to_char_lower);
 }
-

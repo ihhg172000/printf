@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
-* convert_b - _
-* @b: _
-* @flags: _
-* @l: _
-*/
-void convert_b(buff_t *b, __attribute__((unused))char *flags, va_list l)
+ * convert_b - converts the %b to be a binary number.
+ * @buff: a pointer to the buffer.
+ * @flags: a pointer to the flags.
+ * @list: the variable list.
+ */
+void convert_b(buff_t *buff, __attribute__((unused))char *flags, va_list list)
 {
-	unsigned int n = va_arg(l, unsigned int);
+	unsigned int number = va_arg(list, unsigned int);
 
-	handle_buffer_ul(b, n, 2, digit_to_char_lower);
+	handle_buffer_ul(buff, number, 2, digit_to_char_lower);
 }

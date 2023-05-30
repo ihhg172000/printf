@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
-* convert_X - _
-* @b: _
-* @flags: _
-* @l: _
-*/
-void convert_X(buff_t *b, char *flags, va_list l)
+ * convert_X - converts the %X to be a hexadecimal uppercase number.
+ * @buff: a pointer to the buffer.
+ * @flags: a pointer to the flags.
+ * @list: the variable list.
+ */
+void convert_X(buff_t *buff, char *flags, va_list list)
 {
-	unsigned int n = va_arg(l, unsigned int);
+	unsigned int number = va_arg(list, unsigned int);
 
-	if (flags[0] == '#' && n != 0)
-		handle_buffer_s(b, "0X");
+	if (flags[0] == '#' && number != 0)
+		handle_buffer_s(buff, "0X");
 
-	handle_buffer_ul(b, n, 16, digit_to_char_upper);
+	handle_buffer_ul(buff, number, 16, digit_to_char_upper);
 }
 
